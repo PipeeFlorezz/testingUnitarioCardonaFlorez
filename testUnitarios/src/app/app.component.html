@@ -1,0 +1,66 @@
+<div class="acceder">
+  <div class="container mt-5">
+    <div *ngIf="dataSuccess" class="alert alert-success mb-2 success text-center" role="alert">
+      Has ingresado con exito
+    </div>
+    <div *ngIf="yaExiste" class="alert alert-success mb-2 success text-center" role="alert">
+      Este usuario ya existe, ingresa con otro email diferente.
+    </div>
+    <div class="text-white intro text-center titulo">
+      <h1>Bienvenido al projecto final de Angular en Coder House</h1>
+    </div>
+  </div>
+  <div class="maquetacion">
+    <div class="Form">
+      <div mat-dialog-content class="usuario">
+        <form [formGroup]="formAdmin" class="usuario">
+          <div class="row">
+            <div class="col-12">
+              <label for="nombre" class="form-label">Administrador</label>
+              <div class="input-group mb-3 w-100">
+                <input type="text"
+                  [ngClass]="{'form-control': true, 'is-invalid': formAdmin.get('nombre')?.errors && formAdmin.get('nombre')?.touched}"
+                  formControlName="nombre" placeholder="Ingresa un nombre unico de administrador">
+                <div class="invalid-feedback">
+                  <small *ngIf="formAdmin.get('nombre')?.errors?.['required'] && formAdmin.get('nombre')?.touched">El
+                    campo es requerido</small>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="clave" class="form-label">Contraseña</label>
+              <div class="input-group mb-3">
+                <input type="password"
+                  [ngClass]="{'form-control': true, 'is-invalid': formAdmin.get('clave')?.errors && formAdmin.get('clave')?.touched}"
+                  formControlName="clave" placeholder="Ingresa una contraseña">
+                <div class="invalid-feedback">
+                  <small *ngIf="formAdmin.get('clave')?.errors?.['required'] && formAdmin.get('clave')?.touched">El
+                    campo es requerido</small>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-text text-center">Formulario exclusivo para registrarse como administrador</div>
+
+        </form>
+        <div mat-dialog-actions>
+          <div class="mb-3 d-grid">
+            <button type="submit" (click)="adminForm()" class="btn btn-primary"
+              [disabled]="!formAdmin.valid" id="agregar">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div  class="mt-4 admin border border-danger" *ngIf="administradores.length > 0">
+      <ul id="listaAdmins">
+        <li *ngFor="let admin of administradores">{{admin | json}}</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
